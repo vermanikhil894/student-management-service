@@ -7,41 +7,42 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long studentId;
+    private long studentId;
 
     @Column(name = "first_name")
-    public String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    public String lastName;
+    private String lastName;
 
-    @Column(name = "email_id")
-    public String emailId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_temp_add_id")
+    private TemporaryAddress temporaryAddress;
 
-    @Column(name = "term_of_admission")
-    public String termOfAdmission;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_perm_add_id")
+    private PermanentAddress permanentAddress;
 
-    @Column(name = "degree")
-    public String degree;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_personalDetailsId")
+    private PersonalDetails personalDetails;
 
-    @Column(name = "gender")
-    public String gender;
-
-    @Column(name = "country_of_origin")
-    public String countryOfOrigin;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_temp_universityDetailId")
+    private UniversityDetails universityDetails;
 
     public Student() {
 
     }
 
-    public Student(String firstName, String lastName, String emailId, String termOfAdmission, String degree, String gender, String countryOfOrigin) {
+    public Student(String firstName, String lastName, TemporaryAddress temporaryAddress,
+                   PermanentAddress permanentAddress, PersonalDetails personalDetails, UniversityDetails universityDetails) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailId = emailId;
-        this.termOfAdmission = termOfAdmission;
-        this.degree = degree;
-        this.gender = gender;
-        this.countryOfOrigin = countryOfOrigin;
+        this.temporaryAddress = temporaryAddress;
+        this.permanentAddress = permanentAddress;
+        this.personalDetails = personalDetails;
+        this.universityDetails = universityDetails;
     }
 
     public long getStudentId() {
@@ -68,43 +69,35 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public TemporaryAddress getTemporaryAddress() {
+        return temporaryAddress;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setTemporaryAddress(TemporaryAddress temporaryAddress) {
+        this.temporaryAddress = temporaryAddress;
     }
 
-    public String getTermOfAdmission() {
-        return termOfAdmission;
+    public PermanentAddress getPermanentAddress() {
+        return permanentAddress;
     }
 
-    public void setTermOfAdmission(String termOfAdmission) {
-        this.termOfAdmission = termOfAdmission;
+    public void setPermanentAddress(PermanentAddress permanentAddress) {
+        this.permanentAddress = permanentAddress;
     }
 
-    public String getDegree() {
-        return degree;
+    public PersonalDetails getPersonalDetails() {
+        return personalDetails;
     }
 
-    public void setDegree(String degree) {
-        this.degree = degree;
+    public void setPersonalDetails(PersonalDetails personalDetails) {
+        this.personalDetails = personalDetails;
     }
 
-    public String getGender() {
-        return gender;
+    public UniversityDetails getUniversityDetails() {
+        return universityDetails;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getCountryOfOrigin() {
-        return countryOfOrigin;
-    }
-
-    public void setCountryOfOrigin(String countryOfOrigin) {
-        this.countryOfOrigin = countryOfOrigin;
+    public void setUniversityDetails(UniversityDetails universityDetails) {
+        this.universityDetails = universityDetails;
     }
 }
